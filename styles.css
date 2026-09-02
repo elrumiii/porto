@@ -802,3 +802,22 @@ img { max-width: 100%; display: block; }
   .gallery--2, .books, .posters, .games { grid-template-columns: 1fr 1fr; }
   .about__photos { grid-template-columns: 1fr 1fr; }
 }
+
+.typing-container {
+  font-size: 1.2rem; /* Sesuaikan ukuran teks */
+  font-weight: 500;
+  color: var(--white); /* Sesuaikan dengan warna teks di hero section Anda */
+  display: inline-block;
+}
+
+.cursor {
+  display: inline-block;
+  margin-left: 2px;
+  animation: blink 0.7s infinite;
+}
+
+/* Animasi kursor berkedip */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
