@@ -161,3 +161,52 @@
     if (link.dataset.page === path) link.classList.add("active");
   });
 })();
+
+const texts = ["Siswa SMAN 8 Jakarta.", "Graphic Designer.", "Tech Enthusiast."];
+let count = 0;
+let index = 0;
+let currentText = "";
+let letter = "";
+let isDeleting = false;
+
+function typeWriter() {
+  if (count === texts.length) {
+    count = 0; // Mengulang kembali dari awal setelah kata terakhir
+  }
+  
+  currentText = texts[count];
+
+  if (isDeleting) {
+    // Proses menghapus huruf
+    letter = currentText.slice(0, --index);
+  } else {
+    // Proses mengetik huruf
+    letter = currentText.slice(0, ++index);
+  }
+
+  document.querySelector('.typing-text').textContent = letter;
+
+  // Pengaturan kecepatan mengetik
+  let typeSpeed = 100; 
+  if (isDeleting) {
+    typeSpeed /= 2; // Kecepatan menghapus 2x lebih cepat
+  }
+
+  if (!isDeleting && letter.length === currentText.length) {
+    // Jika kata selesai diketik, beri jeda 1.5 detik sebelum dihapus
+    typeSpeed = 1500;
+    isDeleting = true;
+  } else if (isDeleting && letter.length === 0) {
+    // Jika kata selesai dihapus, lanjut ke kata berikutnya
+    isDeleting = false;
+    count++;
+    typeSpeed = 500; // Jeda sebelum mengetik kata baru
+  }
+
+  setTimeout(typeWriter, typeSpeed);
+}
+
+// Menjalankan fungsi setelah halaman dimuat
+document.addEventListener("DOMContentLoaded", function() {
+  typeWriter();
+});
